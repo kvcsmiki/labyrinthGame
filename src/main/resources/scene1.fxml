@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="labyrinth.Controller"
-            prefHeight="600.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="labyrinth.Scene1Controller">
+   <children>
+      <TextField fx:id="nameField" layoutX="104.0" layoutY="159.0" prefHeight="36.0" prefWidth="399.0" />
+      <Label contentDisplay="CENTER" layoutX="226.0" layoutY="118.0" prefHeight="30.0" prefWidth="155.0" text="Enter your name" textAlignment="CENTER">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Button fx:id="okButton" layoutX="287.0" layoutY="209.0" mnemonicParsing="false" onAction="#nextScene" text="OK" />
+      <Label layoutX="179.0" layoutY="30.0" prefHeight="53.0" prefWidth="250.0" text="Labyrinth game" textAlignment="CENTER">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+   </children>
 </AnchorPane>

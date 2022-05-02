@@ -27,7 +27,7 @@
         <maven.surefire.version>3.0.0-M6</maven.surefire.version>
         <jacoco.version>0.8.8</jacoco.version>
         <tinylog.version>2.4.1</tinylog.version>
-        <exec.mainClass><!-- TODO: the main class of your application that contains the main method --></exec.mainClass>
+        <exec.mainClass>labyrinth.Main</exec.mainClass>
     </properties>
     <dependencies>
         <dependency>
