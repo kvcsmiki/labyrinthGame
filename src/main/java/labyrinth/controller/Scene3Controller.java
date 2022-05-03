@@ -1,4 +1,4 @@
-package labyrinth;
+package labyrinth.controller;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;

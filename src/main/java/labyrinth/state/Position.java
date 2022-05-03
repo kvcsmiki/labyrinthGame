@@ -1,8 +1,13 @@
-package labyrinth;
+package labyrinth.state;
+
+import org.tinylog.Logger;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
+/** A class represents a single cell
+ *
+ */
 public class Position {
 
     private int x;
@@ -15,22 +20,43 @@ public class Position {
         this.walls = new ArrayList<>();
     }
 
+    /**
+     *
+     * {@return the x coordinate of the position}
+     */
     public int getX() {
         return x;
     }
 
+    /**
+     *
+     * {@return the y coordinate of the position}
+     */
     public int getY() {
         return y;
     }
 
+    /** Sets the x coordinate to the provided value
+     *
+     * @param x what we want the {@code x} to be set
+     */
     public void setX(int x) {
         this.x = x;
+        Logger.info("X set to: {}",x);
     }
-
+    /** Sets the y coordinate to the provided value
+     *
+     * @param y what we want the {@code y} to be set
+     */
     public void setY(int y) {
         this.y = y;
+        Logger.info("Y set to: {}",y);
     }
 
+    /** Returns the list of the walls that the position has
+     *
+     * @return the list of the walls that the position has
+     */
     public ArrayList<Direction> getWalls(){
         return this.walls;
     }

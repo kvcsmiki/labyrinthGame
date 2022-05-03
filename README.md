@@ -1,3 +1,6 @@
-# TODO: a title for your project
+# Labyrinth game
 
-TODO: a detailed description of your project (must contain at least the original description of the assignment)
+A game where the player has to move the ball to the specified victory
+position, but the ball only stops if it hits a wall.
+The ball can move for directions: left, up, right, down
+

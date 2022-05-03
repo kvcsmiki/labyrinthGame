@@ -5,7 +5,7 @@
 <?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="labyrinth.Scene1Controller">
+            fx:controller="labyrinth.controller.Scene1Controller">
    <TextField fx:id="nameField" layoutX="104.0" layoutY="159.0" prefHeight="36.0" prefWidth="399.0"/>
    <Label contentDisplay="CENTER" layoutX="226.0" layoutY="118.0" prefHeight="30.0" prefWidth="155.0"
           text="Enter your name" textAlignment="CENTER">

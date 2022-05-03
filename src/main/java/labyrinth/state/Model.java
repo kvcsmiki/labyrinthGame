@@ -1,7 +1,12 @@
-package labyrinth;
+package labyrinth.state;
+
+import org.tinylog.Logger;
 
 import java.util.ArrayList;
 
+/**
+ * Represents the game model (the table), with walls, cells, and the ball
+ */
 public class Model {
 
     private int steps;
@@ -12,34 +17,69 @@ public class Model {
 
     public Model(){
         setStart();
+        Logger.info("Model has been built");
     }
 
-    public void setSteps(int steps){
-        this.steps = steps;
+    /**
+     * Increments the steps by one
+     */
+    public void incrementSteps(){
+        this.steps++;
+        Logger.info("Steps has been incremented: {}",steps);
     }
+
+    /** Returns the steps representing the key presses of the user
+     *
+     * @return the steps representing the key presses of the user
+     */
     public int getSteps(){
         return this.steps;
     }
 
+    /**
+     * Fills the {@code allPos} list with positions
+     */
     private void fill(){
         for(int y=0;y<7;y++){
             for(int x=0;x<7;x++){
                 allPos.add(new Position(x,y));
             }
         }
+        Logger.info("allPos has been filled up");
     }
 
+    /** Returns {@code allPos} containing all positions on the table
+     *
+     * @return {@code allPos} containing all positions on the table
+     */
     public ArrayList<Position> getAllPos() {
         return allPos;
     }
 
+    /** Returns the searched position
+     *
+     * @param pos a position which we want to search in {@code allPos}
+     * @return the searched position
+     */
     private Position getFromAllPos(Position pos){
         return allPos.get(allPos.indexOf(pos));
     }
+
+    /** Returns a position which has the same x and y coordinates as provided
+     *
+     * @param x x coordinate of the position
+     * @param y y coordinate of the position
+     * @return a position which has the same x and y coordinates as provided
+     */
     private Position getFromAllPos(int x,int y){
         return getFromAllPos(new Position(x,y));
     }
 
+    /** Builds a provided wall on the provided position, building a wall recursively
+     *  on consecutive positions that share the same wall
+     * @param pos the position where we want to build the {@code wall}
+     * @param wall a direction of which side the wall is on the position
+     */
     private void buildWall(Position pos, Direction wall){
         if(pos.getWalls().contains(wall))
             return;
@@ -70,7 +110,12 @@ public class Model {
                 buildWall(getFromAllPos(temp),Direction.RIGHT);
             }
         }
+        Logger.info("Built a wall on the {} at position: {}", wall,pos);
     }
+
+    /**
+     * Building all walls, and the edge of the table
+     */
     private void buildWalls(){
         for (Position allPo : allPos) {
             if (allPo.getX() == 0)
@@ -100,11 +145,19 @@ public class Model {
         buildWall(getFromAllPos(2,5),Direction.RIGHT);
         buildWall(getFromAllPos(3,6),Direction.RIGHT);
         buildWall(getFromAllPos(5,6),Direction.RIGHT);
+        Logger.info("All walls have been built");
     }
 
+    /** Moves the ball to the provided direction
+     *  if there are no walls blocking, and if the ball is not
+     *  already in the victory position
+     *  if the ball is in the victory position, the user has won
+     * @param direction where we want the ball to be moved
+     */
     public void moveBall(Direction direction){
         if(ballPos.equals(victoryPos)){
             victory = true;
+            Logger.info("User has won");
             return;
         }
         Position pos = getFromAllPos(ballPos);
@@ -128,23 +181,43 @@ public class Model {
                 moveBall(Direction.RIGHT);
             }
         }
+        Logger.info("The ball moved {}",direction);
     }
+
+    /** Returns true or false whether the user has won
+     *
+     * @return true or false whether the user has won
+     */
     public boolean isVictory(){
         return victory;
     }
 
-
+    /** Returns the current position of the ball
+     *
+     * @return the current position of the ball
+     */
     public Position getBallPos() {
         return ballPos;
     }
+
+    /** Returns the position of the victory cell
+     *
+     * @return the position of the victory cell
+     */
     public Position getVictoryPos(){
         return victoryPos;
     }
+
+    /**
+     * Clearing the table, moving the ball to its starting position,
+     * clearing the steps, and rebuilding everything
+     */
     public void setStart(){
         steps = 0;
         ballPos = new Position(4,1);
         victory = false;
         allPos.clear(); fill();
         buildWalls();
+        Logger.info("Starting state is ready");
     }
 }

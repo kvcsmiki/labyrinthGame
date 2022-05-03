@@ -1,4 +1,4 @@
-package labyrinth;
+package labyrinth.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
