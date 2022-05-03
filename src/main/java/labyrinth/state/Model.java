@@ -27,6 +27,10 @@ public class Model {
         this.steps++;
         Logger.info("Steps has been incremented: {}",steps);
     }
+    public void setSteps(int steps){
+        this.steps = steps;
+        Logger.info("Steps has been set to: {}",steps);
+    }
 
     /** Returns the steps representing the key presses of the user
      *
@@ -198,6 +202,10 @@ public class Model {
      */
     public Position getBallPos() {
         return ballPos;
+    }
+
+    public void setBallPos(Position ballPos) {
+        this.ballPos = ballPos;
     }
 
     /** Returns the position of the victory cell

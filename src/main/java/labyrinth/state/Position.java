@@ -41,6 +41,10 @@ public class Position {
      * @param x what we want the {@code x} to be set
      */
     public void setX(int x) {
+        if(x > 6 || x < 0){
+            Logger.warn("x can only be between 0 and 6");
+            return;
+        }
         this.x = x;
         Logger.info("X set to: {}",x);
     }
@@ -49,6 +53,10 @@ public class Position {
      * @param y what we want the {@code y} to be set
      */
     public void setY(int y) {
+        if(y > 6 || y < 0){
+            Logger.warn("x can only be between 0 and 6");
+            return;
+        }
         this.y = y;
         Logger.info("Y set to: {}",y);
     }
