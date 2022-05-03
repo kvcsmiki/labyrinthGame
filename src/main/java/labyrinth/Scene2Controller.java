@@ -2,7 +2,6 @@ package labyrinth;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -13,8 +12,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import org.tinylog.Logger;
-
-import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -47,6 +44,7 @@ public class Scene2Controller {
     }
 
     private void drawStart(){
+        Logger.info("Drawing starting state");
         drawCells();
         drawWalls();
         drawBall();
@@ -170,23 +168,17 @@ public class Scene2Controller {
         Scene3Controller controller = fxmlLoader.getController();
         Scene scene = new Scene(root);
 
-
         controller.setName(name);
         controller.setSteps(model.getSteps());
-
         Date now = new Date(System.currentTimeMillis());
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         controller.setVictoryTime(formatter.format(now));
+        controller.showLabels();
 
-        System.out.println(controller.getName());
-        System.out.println(controller.getSteps());
-        System.out.println(controller.getVictoryTime());
         Stage stage = (Stage) this.root.getScene().getWindow();
         stage.setScene(scene);
 
         stage.show();
     }
-
-
 
 }

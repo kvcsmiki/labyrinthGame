@@ -1,5 +1,6 @@
 package labyrinth;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -52,7 +53,8 @@ public class Scene3Controller {
         Logger.info("victoryTime is set to {}", victoryTime);
     }
 
-    public void initialize(){
+    public void showLabels(){
+        Logger.info("Showing labels on scene 3");
         nameLabel.setText("Congratulations, "+name);
         dateLabel.setText("Date: "+ victoryTime);
         stepsLabel.setText("Steps: "+steps);
@@ -63,7 +65,6 @@ public class Scene3Controller {
         Logger.info("Starting new game");
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/scene1.fxml"));
         Parent root = loader.load();
-        Scene1Controller controller = loader.getController();
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         stage.setTitle("Labyrinth game");
         stage.setResizable(false);
@@ -72,7 +73,7 @@ public class Scene3Controller {
     }
     @FXML
     private void quit(javafx.event.ActionEvent actionEvent){
-        System.exit(0);
+        Platform.exit();
     }
 
 }
