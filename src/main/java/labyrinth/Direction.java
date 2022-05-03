@@ -1,5 +1,5 @@
 package labyrinth;
 
 public enum Direction {
-    NONE,UP, DOWN, LEFT, RIGHT;
+    UP, DOWN, LEFT, RIGHT
 }

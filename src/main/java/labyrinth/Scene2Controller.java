@@ -58,38 +58,38 @@ public class Scene2Controller {
     private void drawCells(){
         GraphicsContext gc = getGraphicsContext();
         ArrayList<Position> allPos = model.getAllPos();
-        for(int i=0;i<allPos.size();i++){
+        for (Position allPo : allPos) {
             gc.setFill(Color.BLACK);
-            gc.fillRect(allPos.get(i).getX()*cellSize,allPos.get(i).getY()*cellSize,cellSize,cellSize);
+            gc.fillRect(allPo.getX() * cellSize, allPo.getY() * cellSize, cellSize, cellSize);
             gc.setFill(Color.WHITE);
-            gc.fillRect(allPos.get(i).getX()*cellSize+1,allPos.get(i).getY()*cellSize+1,cellSize-1,cellSize-1);
+            gc.fillRect(allPo.getX() * cellSize + 1, allPo.getY() * cellSize + 1, cellSize - 1, cellSize - 1);
         }
     }
     private void drawWalls(){
         GraphicsContext gc = getGraphicsContext();
         gc.setLineWidth(8);
         ArrayList<Position> allPos = model.getAllPos();
-        for(int i=0;i<allPos.size();i++){
-            for(int j=0;j<allPos.get(i).getWalls().size();j++){
-                switch(allPos.get(i).getWalls().get(j)){
+        for (Position allPo : allPos) {
+            for (int j = 0; j < allPo.getWalls().size(); j++) {
+                switch (allPo.getWalls().get(j)) {
                     case UP -> {
-                        gc.moveTo(allPos.get(i).getX()*cellSize,allPos.get(i).getY()*cellSize);
-                        gc.lineTo(allPos.get(i).getX()*cellSize+cellSize,allPos.get(i).getY()*cellSize);
+                        gc.moveTo(allPo.getX() * cellSize, allPo.getY() * cellSize);
+                        gc.lineTo(allPo.getX() * cellSize + cellSize, allPo.getY() * cellSize);
                         gc.stroke();
                     }
                     case DOWN -> {
-                        gc.moveTo(allPos.get(i).getX()*cellSize,allPos.get(i).getY()*cellSize+cellSize);
-                        gc.lineTo(allPos.get(i).getX()*cellSize+cellSize,allPos.get(i).getY()*cellSize+cellSize);
+                        gc.moveTo(allPo.getX() * cellSize, allPo.getY() * cellSize + cellSize);
+                        gc.lineTo(allPo.getX() * cellSize + cellSize, allPo.getY() * cellSize + cellSize);
                         gc.stroke();
                     }
                     case LEFT -> {
-                        gc.moveTo(allPos.get(i).getX()*cellSize,allPos.get(i).getY()*cellSize);
-                        gc.lineTo(allPos.get(i).getX()*cellSize,allPos.get(i).getY()*cellSize+cellSize);
+                        gc.moveTo(allPo.getX() * cellSize, allPo.getY() * cellSize);
+                        gc.lineTo(allPo.getX() * cellSize, allPo.getY() * cellSize + cellSize);
                         gc.stroke();
                     }
                     case RIGHT -> {
-                        gc.moveTo(allPos.get(i).getX()*cellSize+cellSize,allPos.get(i).getY()*cellSize);
-                        gc.lineTo(allPos.get(i).getX()*cellSize+cellSize,allPos.get(i).getY()*cellSize+cellSize);
+                        gc.moveTo(allPo.getX() * cellSize + cellSize, allPo.getY() * cellSize);
+                        gc.lineTo(allPo.getX() * cellSize + cellSize, allPo.getY() * cellSize + cellSize);
                         gc.stroke();
                     }
                 }

@@ -7,9 +7,8 @@ public class Model {
     private int steps;
     private Position ballPos;
     private final Position victoryPos =  new Position(2,5);
-    private Direction direction;
     private boolean victory;
-    private ArrayList<Position> allPos = new ArrayList<>();
+    private final ArrayList<Position> allPos = new ArrayList<>();
 
     public Model(){
         setStart();
@@ -73,15 +72,15 @@ public class Model {
         }
     }
     private void buildWalls(){
-        for(int i=0;i< allPos.size();i++){
-            if(allPos.get(i).getX() == 0)
-                buildWall(allPos.get(i),Direction.LEFT);
-            if(allPos.get(i).getX() == 6)
-                buildWall(allPos.get(i),Direction.RIGHT);
-            if(allPos.get(i).getY() == 0)
-                buildWall(allPos.get(i),Direction.UP);
-            if(allPos.get(i).getY() == 6)
-                buildWall(allPos.get(i),Direction.DOWN);
+        for (Position allPo : allPos) {
+            if (allPo.getX() == 0)
+                buildWall(allPo, Direction.LEFT);
+            if (allPo.getX() == 6)
+                buildWall(allPo, Direction.RIGHT);
+            if (allPo.getY() == 0)
+                buildWall(allPo, Direction.UP);
+            if (allPo.getY() == 6)
+                buildWall(allPo, Direction.DOWN);
         }
         buildWall(getFromAllPos(0,0),Direction.RIGHT);
         buildWall(getFromAllPos(2,0),Direction.DOWN);
@@ -101,10 +100,6 @@ public class Model {
         buildWall(getFromAllPos(2,5),Direction.RIGHT);
         buildWall(getFromAllPos(3,6),Direction.RIGHT);
         buildWall(getFromAllPos(5,6),Direction.RIGHT);
-    }
-    private void printAllWalls(){
-        for(int i=0;i<allPos.size();i++)
-            System.out.println("pos: "+allPos.get(i)+" walls: "+allPos.get(i).getWalls());
     }
 
     public void moveBall(Direction direction){
@@ -148,7 +143,6 @@ public class Model {
     public void setStart(){
         steps = 0;
         ballPos = new Position(4,1);
-        direction = Direction.NONE;
         victory = false;
         allPos.clear(); fill();
         buildWalls();

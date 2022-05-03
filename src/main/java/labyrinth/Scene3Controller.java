@@ -73,6 +73,7 @@ public class Scene3Controller {
     }
     @FXML
     private void quit(javafx.event.ActionEvent actionEvent){
+        Logger.info("Shutting down...");
         Platform.exit();
     }
 

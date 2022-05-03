@@ -3,8 +3,7 @@
 <?import javafx.scene.canvas.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox fx:id="root" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="labyrinth.Scene2Controller" alignment="CENTER">
-    <children>
-        <Canvas fx:id="canvas" height="702" width="702"/>
-    </children>
+<VBox fx:id="root" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="labyrinth.Scene2Controller" alignment="CENTER">
+    <Canvas fx:id="canvas" height="702" width="702"/>
 </VBox>

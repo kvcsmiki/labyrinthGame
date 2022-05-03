@@ -16,7 +16,6 @@ public class LabyrinthApplication extends Application {
         Logger.info("Starting application");
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/scene1.fxml"));
         Parent root = loader.load();
-        Scene1Controller controller = loader.getController();
         stage.setTitle("Labyrinth game");
         stage.setResizable(false);
         stage.setScene(new Scene(root));
