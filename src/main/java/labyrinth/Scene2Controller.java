@@ -1,13 +1,24 @@
 package labyrinth;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.stage.Stage;
+import org.tinylog.Logger;
 
+import java.awt.event.ActionEvent;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Scene2Controller {
     @FXML
@@ -41,6 +52,11 @@ public class Scene2Controller {
         drawBall();
         drawFinish();
     }
+    private void drawTable(){
+        drawCells();
+        drawWalls();
+        drawFinish();
+    }
     private void drawCells(){
         GraphicsContext gc = getGraphicsContext();
         ArrayList<Position> allPos = model.getAllPos();
@@ -53,7 +69,7 @@ public class Scene2Controller {
     }
     private void drawWalls(){
         GraphicsContext gc = getGraphicsContext();
-        gc.setLineWidth(4);
+        gc.setLineWidth(8);
         ArrayList<Position> allPos = model.getAllPos();
         for(int i=0;i<allPos.size();i++){
             for(int j=0;j<allPos.get(i).getWalls().size();j++){
@@ -96,6 +112,79 @@ public class Scene2Controller {
         gc.setFill(Color.BLACK);
         gc.setFont(new Font("Calibri",38));
         gc.fillText("CÉL", victoryPos.getX()*cellSize + 23, victoryPos.getY()*cellSize + cellSize/2*1.2);
+    }
+
+    private void keyPressHandler(KeyEvent keyEvent){
+        model.setSteps(model.getSteps() + 1);
+        switch(keyEvent.getCode()){
+            case UP, W -> {
+                model.moveBall(Direction.UP);
+                drawTable();
+                drawBall();
+                if(model.isVictory()){
+                    nextScene();
+                }
+            }
+            case A, LEFT -> {
+                model.moveBall(Direction.LEFT);
+                drawTable();
+                drawBall();
+                if(model.isVictory()){
+                    nextScene();
+                }
+            }
+            case D, RIGHT -> {
+                model.moveBall(Direction.RIGHT);
+                drawTable();
+                drawBall();
+                if(model.isVictory()){
+                    nextScene();
+                }
+            }
+            case S, DOWN -> {
+                model.moveBall(Direction.DOWN);
+                drawTable();
+                drawBall();
+                if(model.isVictory()){
+                    nextScene();
+                }
+            }
+            case R ->{
+                model.setStart();
+                drawStart();
+            }
+        }
+    }
+
+    public void initHandlers(Scene scene){
+        scene.setOnKeyPressed(this::keyPressHandler);
+    }
+
+    public void nextScene(){
+        Logger.info("Passing name: {} to next scene", name);
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/scene3.fxml"));
+        Parent root = null;
+        try {
+            root = fxmlLoader.load();
+        }catch (IOException e){Logger.error(e.getMessage());}
+        Scene3Controller controller = fxmlLoader.getController();
+        Scene scene = new Scene(root);
+
+
+        controller.setName(name);
+        controller.setSteps(model.getSteps());
+
+        Date now = new Date(System.currentTimeMillis());
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        controller.setVictoryTime(formatter.format(now));
+
+        System.out.println(controller.getName());
+        System.out.println(controller.getSteps());
+        System.out.println(controller.getVictoryTime());
+        Stage stage = (Stage) this.root.getScene().getWindow();
+        stage.setScene(scene);
+
+        stage.show();
     }
 
 

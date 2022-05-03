@@ -6,20 +6,20 @@ public class Model {
 
     private int steps;
     private Position ballPos;
-    private final Position victoryPos;
+    private final Position victoryPos =  new Position(2,5);
     private Direction direction;
     private boolean victory;
-    private ArrayList<Position> allPos;
+    private ArrayList<Position> allPos = new ArrayList<>();
 
     public Model(){
-        steps = 0;
-        ballPos = new Position(4,1);
-        victoryPos = new Position(2,5);
-        direction = Direction.NONE;
-        victory = false;
-        allPos = new ArrayList<>(); fill();
-        buildWalls();
-        printAllWalls();
+        setStart();
+    }
+
+    public void setSteps(int steps){
+        this.steps = steps;
+    }
+    public int getSteps(){
+        return this.steps;
     }
 
     private void fill(){
@@ -122,15 +122,15 @@ public class Model {
             }
             case DOWN -> {
                 ballPos.setY(ballPos.getY()+1);
-                moveBall(Direction.UP);
+                moveBall(Direction.DOWN);
             }
             case LEFT -> {
                 ballPos.setX(ballPos.getX()-1);
-                moveBall(Direction.UP);
+                moveBall(Direction.LEFT);
             }
             case RIGHT -> {
                 ballPos.setX(ballPos.getX()+1);
-                moveBall(Direction.UP);
+                moveBall(Direction.RIGHT);
             }
         }
     }
@@ -144,5 +144,13 @@ public class Model {
     }
     public Position getVictoryPos(){
         return victoryPos;
+    }
+    public void setStart(){
+        steps = 0;
+        ballPos = new Position(4,1);
+        direction = Direction.NONE;
+        victory = false;
+        allPos.clear(); fill();
+        buildWalls();
     }
 }

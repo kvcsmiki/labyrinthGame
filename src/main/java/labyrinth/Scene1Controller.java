@@ -14,7 +14,6 @@ import java.io.IOException;
 
 public class Scene1Controller {
 
-    private Model model;
 
     @FXML
     private TextField nameField;
@@ -25,9 +24,12 @@ public class Scene1Controller {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/scene2.fxml"));
         Parent root = fxmlLoader.load();
         Scene2Controller controller = fxmlLoader.getController();
+        Scene scene = new Scene(root);
+        controller.initHandlers(scene);
         controller.setName(nameField.getText());
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(root));
+        stage.setScene(scene);
+
         stage.show();
     }
 }
