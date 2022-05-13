@@ -30,6 +30,9 @@ public class Model {
      */
     private final ArrayList<Position> allPos = new ArrayList<>();
 
+    /**
+     * Creates an instance of the model.
+     */
     public Model(){
         setStart();
         Logger.info("Model has been built");
@@ -42,6 +45,11 @@ public class Model {
         this.steps++;
         Logger.info("Steps has been incremented: {}",steps);
     }
+
+    /**
+     *  Sets the steps to the specified amount.
+     * @param steps the amount of steps the player has made
+     */
     public void setSteps(int steps){
         this.steps = steps;
         Logger.info("Steps has been set to: {}",steps);

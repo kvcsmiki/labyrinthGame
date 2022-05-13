@@ -23,6 +23,11 @@ public class Position {
      */
     private ArrayList<Direction> walls;
 
+    /**
+     * Creates a position if x and y are between 0 and 6.
+     * @param x the x coordinate of the position
+     * @param y the x coordinate of the position
+     */
     public Position(int x, int y) {
         if(x > 6 || y > 6 || x < 0 || y < 0){
             Logger.warn("x and y can only be between 0 and 6");

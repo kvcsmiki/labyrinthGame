@@ -15,10 +15,6 @@ import labyrinth.state.Direction;
 import labyrinth.state.Model;
 import labyrinth.state.Position;
 import org.tinylog.Logger;
-import results.GameResultRepository;
-
-import javax.inject.Inject;
-import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -31,12 +27,9 @@ public class Scene2Controller {
     @FXML
     Canvas canvas;
 
-    @Inject
-    GameResultRepository gameResultRepository = new GameResultRepository();
-
     private String name;
 
-    Model model;
+    private Model model;
 
     private final int cellSize = 100;
 
