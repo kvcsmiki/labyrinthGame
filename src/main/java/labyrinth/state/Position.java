@@ -5,13 +5,22 @@ import org.tinylog.Logger;
 import java.util.ArrayList;
 import java.util.Objects;
 
-/** A class represents a single cell
+/** A class represents a single cell.
  *
  */
 public class Position {
 
+    /**
+     * The x coordinate of the position.
+     */
     private int x;
+    /**
+     * The y coordinate of the position.
+     */
     private int y;
+    /**
+     * A list of the walls that the cells has.
+     */
     private ArrayList<Direction> walls;
 
     public Position(int x, int y) {
@@ -24,23 +33,23 @@ public class Position {
         this.walls = new ArrayList<>();
     }
 
-    /**
+    /** Returns the x coordinate of the position.
      *
-     * {@return the x coordinate of the position}
+     * @return the x coordinate of the position
      */
     public int getX() {
         return x;
     }
 
-    /**
+    /** Returns the y coordinate of the position.
      *
-     * {@return the y coordinate of the position}
+     * @return the y coordinate of the position
      */
     public int getY() {
         return y;
     }
 
-    /** Sets the x coordinate to the provided value
+    /** Sets the x coordinate to the provided value.
      *
      * @param x what we want the {@code x} to be set
      */
@@ -52,7 +61,7 @@ public class Position {
         this.x = x;
         Logger.info("X set to: {}",x);
     }
-    /** Sets the y coordinate to the provided value
+    /** Sets the y coordinate to the provided value.
      *
      * @param y what we want the {@code y} to be set
      */
@@ -65,7 +74,7 @@ public class Position {
         Logger.info("Y set to: {}",y);
     }
 
-    /** Returns the list of the walls that the position has
+    /** Returns the list of the walls that the position has.
      *
      * @return the list of the walls that the position has
      */

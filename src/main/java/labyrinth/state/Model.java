@@ -5,14 +5,29 @@ import org.tinylog.Logger;
 import java.util.ArrayList;
 
 /**
- * Represents the game model (the table), with walls, cells, and the ball
+ * Represents the game model (the table), with walls, cells, and the ball.
  */
 public class Model {
 
+    /**
+     * Represents how many steps the player has made.
+     */
     private int steps;
+    /**
+     * Represents the position of the ball.
+     */
     private Position ballPos;
+    /**
+     * Represents the position of the finish, cannot be changed.
+     */
     private final Position victoryPos =  new Position(2,5);
+    /**
+     * Represents if the player won the game.
+     */
     private boolean victory;
+    /**
+     * Represents a list that will contain all positions of the table.
+     */
     private final ArrayList<Position> allPos = new ArrayList<>();
 
     public Model(){
@@ -21,7 +36,7 @@ public class Model {
     }
 
     /**
-     * Increments the steps by one
+     * Increments the steps by one.
      */
     public void incrementSteps(){
         this.steps++;
@@ -32,16 +47,16 @@ public class Model {
         Logger.info("Steps has been set to: {}",steps);
     }
 
-    /** Returns the steps representing the key presses of the user
+    /** Returns the steps representing the key presses of the user.
      *
-     * @return the steps representing the key presses of the user
+     * @return the steps representing the key presses of the user.
      */
     public int getSteps(){
         return this.steps;
     }
 
     /**
-     * Fills the {@code allPos} list with positions
+     * Fills the {@code allPos} list with positions.
      */
     private void fill(){
         for(int y=0;y<7;y++){
@@ -52,15 +67,15 @@ public class Model {
         Logger.info("allPos has been filled up");
     }
 
-    /** Returns {@code allPos} containing all positions on the table
+    /** Returns {@code allPos} containing all positions on the table.
      *
-     * @return {@code allPos} containing all positions on the table
+     * @return {@code allPos} containing all positions on the table.
      */
     public ArrayList<Position> getAllPos() {
         return allPos;
     }
 
-    /** Returns the searched position
+    /** Returns the searched position.
      *
      * @param pos a position which we want to search in {@code allPos}
      * @return the searched position
@@ -69,7 +84,7 @@ public class Model {
         return allPos.get(allPos.indexOf(pos));
     }
 
-    /** Returns a position which has the same x and y coordinates as provided
+    /** Returns a position which has the same x and y coordinates as provided.
      *
      * @param x x coordinate of the position
      * @param y y coordinate of the position
@@ -79,7 +94,7 @@ public class Model {
         return getFromAllPos(new Position(x,y));
     }
 
-    /** Builds a provided wall on the provided position, building a wall recursively
+    /** Builds a provided wall on the provided position, building a wall recursively.
      *  on consecutive positions that share the same wall
      * @param pos the position where we want to build the {@code wall}
      * @param wall a direction of which side the wall is on the position
@@ -118,7 +133,7 @@ public class Model {
     }
 
     /**
-     * Building all walls, and the edge of the table
+     * Building all walls, and the edge of the table.
      */
     private void buildWalls(){
         for (Position allPo : allPos) {
@@ -152,7 +167,7 @@ public class Model {
         Logger.info("All walls have been built");
     }
 
-    /** Moves the ball to the provided direction
+    /** Moves the ball to the provided direction.
      *  if there are no walls blocking, and if the ball is not
      *  already in the victory position
      *  if the ball is in the victory position, the user has won
@@ -188,7 +203,7 @@ public class Model {
         Logger.info("The ball moved {}",direction);
     }
 
-    /** Returns true or false whether the user has won
+    /** Returns true or false whether the user has won.
      *
      * @return true or false whether the user has won
      */
@@ -196,7 +211,7 @@ public class Model {
         return victory;
     }
 
-    /** Returns the current position of the ball
+    /** Returns the current position of the ball.
      *
      * @return the current position of the ball
      */
@@ -204,11 +219,15 @@ public class Model {
         return ballPos;
     }
 
+    /** Sets the position of the ball to the provided position.
+     *
+     * @param ballPos the position of the ball
+     */
     public void setBallPos(Position ballPos) {
         this.ballPos = ballPos;
     }
 
-    /** Returns the position of the victory cell
+    /** Returns the position of the victory cell.
      *
      * @return the position of the victory cell
      */
@@ -218,7 +237,7 @@ public class Model {
 
     /**
      * Clearing the table, moving the ball to its starting position,
-     * clearing the steps, and rebuilding everything
+     * clearing the steps, and rebuilding everything.
      */
     public void setStart(){
         steps = 0;

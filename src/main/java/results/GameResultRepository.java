@@ -19,15 +19,18 @@ import java.util.List;
 public class GameResultRepository{
 
     /**
-     * An object mapper to write and read json files
+     * An object mapper to write and read json files.
      */
     private final ObjectMapper oj = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
 
     /**
-     * A list where the game results will be stored
+     * A list where the game results will be stored.
      */
     private List<GameResult> gameResultRepository;
 
+    /**
+     * Creates the repository by reading the player.json file.
+     */
     public GameResultRepository() {
 
         try {
@@ -41,7 +44,7 @@ public class GameResultRepository{
     }
 
     /**
-     *  Adds one result to the repository and rewrites the json file
+     *  Adds one result to the repository and rewrites the json file.
      * @param element a result a player got
      */
     public void addOne(GameResult element){
@@ -58,7 +61,7 @@ public class GameResultRepository{
         }
     }
 
-    /** Returns a list of game results of the repository
+    /** Returns a list of game results of the repository.
      *
      * @return a list of game results of the repository
      */
