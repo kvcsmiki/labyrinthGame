@@ -35,12 +35,6 @@ public class Scene3Controller {
     private int steps;
     private String victoryTime;
 
-    @FXML
-    public void initialize() throws IOException {
-        System.out.println("init");
-        System.out.println("jajaj");
-    }
-
     public String getName() {
         return name;
     }
@@ -69,6 +63,7 @@ public class Scene3Controller {
     }
     private void savePlayer() throws IOException {
         gameResultRepository.addOne(createGameResult());
+        Logger.info("player saved");
     }
 
     public void showLabels(){
@@ -111,6 +106,7 @@ public class Scene3Controller {
                 .date(this.victoryTime)
                 .steps(this.steps)
                 .build();
+
     }
 
 }
