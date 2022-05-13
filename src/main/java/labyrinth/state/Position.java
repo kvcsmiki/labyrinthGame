@@ -15,6 +15,10 @@ public class Position {
     private ArrayList<Direction> walls;
 
     public Position(int x, int y) {
+        if(x > 6 || y > 6 || x < 0 || y < 0){
+            Logger.warn("x and y can only be between 0 and 6");
+            return;
+        }
         this.x = x;
         this.y = y;
         this.walls = new ArrayList<>();
@@ -54,7 +58,7 @@ public class Position {
      */
     public void setY(int y) {
         if(y > 6 || y < 0){
-            Logger.warn("x can only be between 0 and 6");
+            Logger.warn("y can only be between 0 and 6");
             return;
         }
         this.y = y;

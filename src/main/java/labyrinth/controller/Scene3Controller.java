@@ -1,5 +1,4 @@
 package labyrinth.controller;
-
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,12 +7,18 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
+import results.GameResult;
 import org.tinylog.Logger;
+import results.GameResultRepository;
 
 import java.io.IOException;
+import java.util.List;
 
 public class Scene3Controller {
+
+    private GameResultRepository gameResultRepository = new GameResultRepository();
 
     @FXML
     private Label stepsLabel;
@@ -22,9 +27,19 @@ public class Scene3Controller {
     @FXML
     private Label dateLabel;
 
+    @FXML
+    private TextArea resultField;
+
+
     private String name;
     private int steps;
     private String victoryTime;
+
+    @FXML
+    public void initialize() throws IOException {
+        System.out.println("init");
+        System.out.println("jajaj");
+    }
 
     public String getName() {
         return name;
@@ -52,12 +67,26 @@ public class Scene3Controller {
         this.victoryTime = victoryTime;
         Logger.info("victoryTime is set to {}", victoryTime);
     }
+    private void savePlayer() throws IOException {
+        gameResultRepository.addOne(createGameResult());
+    }
 
     public void showLabels(){
         Logger.info("Showing labels on scene 3");
         nameLabel.setText("Congratulations, "+name);
         dateLabel.setText("Date: "+ victoryTime);
         stepsLabel.setText("Steps: "+steps);
+        try{
+            savePlayer();
+        }catch (IOException e){Logger.error(e.getMessage());}
+    }
+
+    public void showTable(){
+        List<GameResult> gameResultList = gameResultRepository.toList();
+        resultField.setText("Previous results: \n");
+        for(int i=gameResultList.size()-1;i>(gameResultList.size() > 10 ? gameResultList.size()-11 : 0);i--){
+            resultField.setText(resultField.getText() + gameResultList.get(i).toString()+"\n");
+        }
     }
 
     @FXML
@@ -75,6 +104,13 @@ public class Scene3Controller {
     private void quit(javafx.event.ActionEvent actionEvent){
         Logger.info("Shutting down...");
         Platform.exit();
+    }
+    private GameResult createGameResult() {
+        return GameResult.builder()
+                .name(this.name)
+                .date(this.victoryTime)
+                .steps(this.steps)
+                .build();
     }
 
 }

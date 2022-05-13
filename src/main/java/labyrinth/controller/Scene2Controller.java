@@ -15,6 +15,10 @@ import labyrinth.state.Direction;
 import labyrinth.state.Model;
 import labyrinth.state.Position;
 import org.tinylog.Logger;
+import results.GameResultRepository;
+
+import javax.inject.Inject;
+import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -26,6 +30,9 @@ public class Scene2Controller {
 
     @FXML
     Canvas canvas;
+
+    @Inject
+    GameResultRepository gameResultRepository = new GameResultRepository();
 
     private String name;
 
@@ -175,7 +182,7 @@ public class Scene2Controller {
         Parent root = null;
         try {
             root = fxmlLoader.load();
-        }catch (IOException e){Logger.error(e.getMessage());}
+        }catch (IOException e){Logger.error(e.getLocalizedMessage());}
         Scene3Controller controller = fxmlLoader.getController();
         Scene scene = new Scene(root);
         controller.setName(name);
@@ -184,8 +191,8 @@ public class Scene2Controller {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         controller.setVictoryTime(formatter.format(now));
         Logger.info("Passing name: {}, victory date: {}, steps: {},  to next scene", controller.getName(),controller.getVictoryTime(),controller.getSteps());
+        controller.showTable();
         controller.showLabels();
-
         Stage stage = (Stage) this.root.getScene().getWindow();
         stage.setScene(scene);
 
