@@ -31,8 +31,13 @@ public class GameResult {
      */
     private int steps;
 
+    /**
+     * The number of resets made by the player.
+     */
+    private int resets;
+
     @Override
     public String toString() {
-        return name+": steps: "+steps+", date of victory: "+date;
+        return name+": steps: "+steps+", date of victory: "+date+", resets: "+resets;
     }
 }

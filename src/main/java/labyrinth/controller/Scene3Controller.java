@@ -34,6 +34,7 @@ public class Scene3Controller {
     private String name;
     private int steps;
     private String victoryTime;
+    private int resets;
 
     public String getName() {
         return name;
@@ -47,6 +48,10 @@ public class Scene3Controller {
         return victoryTime;
     }
 
+    public int getResets() {
+        return resets;
+    }
+
     public void setName(String name) {
         this.name = name;
         Logger.info("name is set to {}", name);
@@ -55,6 +60,10 @@ public class Scene3Controller {
     public void setSteps(int steps) {
         this.steps = steps;
         Logger.info("steps is set to {}", steps);
+    }
+    public void setResets(int resets){
+        this.resets = resets;
+        Logger.info("resets is set to {}", resets);
     }
 
     public void setVictoryTime(String victoryTime) {
@@ -70,7 +79,7 @@ public class Scene3Controller {
         Logger.info("Showing labels on scene 3");
         nameLabel.setText("Congratulations, "+name);
         dateLabel.setText("Date: "+ victoryTime);
-        stepsLabel.setText("Steps: "+steps);
+        stepsLabel.setText("Steps: "+steps+", resets: "+resets);
         try{
             savePlayer();
         }catch (IOException e){Logger.error(e.getMessage());}
@@ -105,6 +114,7 @@ public class Scene3Controller {
                 .name(this.name)
                 .date(this.victoryTime)
                 .steps(this.steps)
+                .resets(this.resets)
                 .build();
 
     }

@@ -12,7 +12,12 @@ public class Model {
     /**
      * Represents how many steps the player has made.
      */
-    private int steps;
+    private int steps = 0;
+
+    /**
+     *  Represents how many resets the player has made.
+     */
+    private int resets = -1;
     /**
      * Represents the position of the ball.
      */
@@ -243,12 +248,20 @@ public class Model {
         return victoryPos;
     }
 
+    /** Returns the resets made by the player
+     *
+     * @return the resets made by the player
+     */
+    public int getResets() {
+        return resets;
+    }
+
     /**
      * Clearing the table, moving the ball to its starting position,
      * clearing the steps, and rebuilding everything.
      */
     public void setStart(){
-        steps = 0;
+        resets++;
         ballPos = new Position(4,1);
         victory = false;
         allPos.clear(); fill();

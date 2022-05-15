@@ -180,10 +180,11 @@ public class Scene2Controller {
         Scene scene = new Scene(root);
         controller.setName(name);
         controller.setSteps(model.getSteps());
+        controller.setResets(model.getResets());
         Date now = new Date(System.currentTimeMillis());
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         controller.setVictoryTime(formatter.format(now));
-        Logger.info("Passing name: {}, victory date: {}, steps: {},  to next scene", controller.getName(),controller.getVictoryTime(),controller.getSteps());
+        Logger.info("Passing name: {}, victory date: {}, steps: {}, resets: {}  to next scene", controller.getName(),controller.getVictoryTime(),controller.getSteps(), controller.getResets());
         controller.showTable();
         controller.showLabels();
         Stage stage = (Stage) this.root.getScene().getWindow();
