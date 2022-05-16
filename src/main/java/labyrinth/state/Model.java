@@ -21,7 +21,7 @@ public class Model {
     /**
      * Represents the position of the ball.
      */
-    private Position ballPos;
+    private Position ballPos = new Position(4,1);
     /**
      * Represents the position of the finish, cannot be changed.
      */
@@ -29,7 +29,7 @@ public class Model {
     /**
      * Represents if the player won the game.
      */
-    private boolean victory;
+    private boolean victory = false;
     /**
      * Represents a list that will contain all positions of the table.
      */
@@ -39,6 +39,8 @@ public class Model {
      * Creates an instance of the model.
      */
     public Model(){
+        fill();
+        buildWalls();
         setStart();
         Logger.info("Model has been built");
     }
@@ -149,16 +151,11 @@ public class Model {
      * Building all walls, and the edge of the table.
      */
     private void buildWalls(){
-        for (Position allPo : allPos) {
-            if (allPo.getX() == 0)
-                buildWall(allPo, Direction.LEFT);
-            if (allPo.getX() == 6)
-                buildWall(allPo, Direction.RIGHT);
-            if (allPo.getY() == 0)
-                buildWall(allPo, Direction.UP);
-            if (allPo.getY() == 6)
-                buildWall(allPo, Direction.DOWN);
-        }
+        allPos.stream().filter(pos -> pos.getX() == 0).forEach(pos -> buildWall(pos,Direction.LEFT));
+        allPos.stream().filter(pos -> pos.getX() == 6).forEach(pos -> buildWall(pos,Direction.RIGHT));
+        allPos.stream().filter(pos -> pos.getY() == 0).forEach(pos -> buildWall(pos,Direction.UP));
+        allPos.stream().filter(pos -> pos.getY() == 6).forEach(pos -> buildWall(pos,Direction.DOWN));
+
         buildWall(getFromAllPos(0,0),Direction.RIGHT);
         buildWall(getFromAllPos(2,0),Direction.DOWN);
         buildWall(getFromAllPos(3,0),Direction.RIGHT);
@@ -185,16 +182,17 @@ public class Model {
      *  already in the victory position
      *  if the ball is in the victory position, the user has won
      * @param direction where we want the ball to be moved
+     * @return the position of the ball before the movement, null if didn't move
      */
-    public void moveBall(Direction direction){
+    public Position moveBall(Direction direction){
         if(ballPos.equals(victoryPos)){
             victory = true;
             Logger.info("User has won");
-            return;
+            return null;
         }
         Position pos = getFromAllPos(ballPos);
         if(pos.getWalls().contains(direction))
-            return;
+            return null;
         switch (direction){
             case UP -> {
                 ballPos.setY(ballPos.getY()-1);
@@ -214,6 +212,7 @@ public class Model {
             }
         }
         Logger.info("The ball moved {}",direction);
+        return pos;
     }
 
     /** Returns true or false whether the user has won.
@@ -262,10 +261,8 @@ public class Model {
      */
     public void setStart(){
         resets++;
-        ballPos = new Position(4,1);
-        victory = false;
-        allPos.clear(); fill();
-        buildWalls();
+        ballPos.setX(4);
+        ballPos.setY(1);
         Logger.info("Starting state is ready");
     }
 }

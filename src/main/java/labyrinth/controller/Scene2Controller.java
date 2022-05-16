@@ -51,15 +51,9 @@ public class Scene2Controller {
     private void drawStart(){
         drawCells();
         drawWalls();
-        drawBall();
+        drawBall(null);
         drawFinish();
         Logger.info("Starting state has been drawn");
-    }
-    private void drawTable(){
-        drawCells();
-        drawWalls();
-        drawFinish();
-        Logger.info("Table has been drawn");
     }
     private void drawCells(){
         GraphicsContext gc = getGraphicsContext();
@@ -105,9 +99,13 @@ public class Scene2Controller {
         Logger.info("Walls have been drawn");
     }
 
-    private void drawBall(){
+    private void drawBall(Position lastBallPos){
         GraphicsContext gc = getGraphicsContext();
         Position ballPos = model.getBallPos();
+        if(lastBallPos != null){
+            gc.setFill(Color.WHITE);
+            gc.fillOval(lastBallPos.getX()*cellSize+cellSize/5, lastBallPos.getY()*cellSize+cellSize/5, cellSize/1.5,cellSize/1.5);
+        }
         gc.setFill(Color.BLUE);
         gc.fillOval(ballPos.getX()*cellSize+cellSize/4, ballPos.getY()*cellSize+cellSize/4, cellSize/2,cellSize/2);
         Logger.info("Ball has been drawn");
@@ -126,33 +124,29 @@ public class Scene2Controller {
         model.incrementSteps();
         switch(keyEvent.getCode()){
             case UP, W -> {
-                model.moveBall(Direction.UP);
-                drawTable();
-                drawBall();
+                Position lastBallPos = model.moveBall(Direction.UP);
+                drawBall(lastBallPos);
                 if(model.isVictory()){
                     nextScene();
                 }
             }
             case A, LEFT -> {
-                model.moveBall(Direction.LEFT);
-                drawTable();
-                drawBall();
+                Position lastBallPos = model.moveBall(Direction.LEFT);
+                drawBall(lastBallPos);
                 if(model.isVictory()){
                     nextScene();
                 }
             }
             case D, RIGHT -> {
-                model.moveBall(Direction.RIGHT);
-                drawTable();
-                drawBall();
+                Position lastBallPos = model.moveBall(Direction.RIGHT);
+                drawBall(lastBallPos);
                 if(model.isVictory()){
                     nextScene();
                 }
             }
             case S, DOWN -> {
-                model.moveBall(Direction.DOWN);
-                drawTable();
-                drawBall();
+                Position lastBallPos = model.moveBall(Direction.DOWN);
+                drawBall(lastBallPos);
                 if(model.isVictory()){
                     nextScene();
                 }
