@@ -83,8 +83,10 @@ public class ModelTest {
     }
     @Test
     void setStart(){
+        int resets = model.getResets();
         model.setStart();
-        assertEquals(0,model.getSteps());
+        assertEquals(10,model.getSteps());
+        assertEquals(resets+1,model.getResets());
         assertEquals(new Position(4,1),model.getBallPos());
     }
 
